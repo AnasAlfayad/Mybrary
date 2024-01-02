@@ -8,6 +8,7 @@ const expressLayouts = require("express-ejs-layouts");
 
 const indexRouter = require("./routes/index");
 const authorRouter = require("./routes/authors");
+const bookRouter = require("./routes/books");
 
 app.set("view engine", "ejs");
 app.set("views", "./views"); // This defaults to the views directory in the application root directory. view engine
@@ -17,12 +18,17 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.DATABASE_URL);
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to Mongoose"));
+main().catch((err) => console.error(err));
+
+async function main() {
+  await mongoose.connect(process.env.DATABASE_URL);
+}
+const mongooseDB = mongoose.connection;
+mongooseDB.on("error", (error) => console.error(error));
+mongooseDB.once("open", () => console.log("Connected to Mongoose"));
 
 app.use("/", indexRouter);
 app.use("/authors", authorRouter);
+app.use("/books", bookRouter);
 
 app.listen(process.env.PORT || 3000);
