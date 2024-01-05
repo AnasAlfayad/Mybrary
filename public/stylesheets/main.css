@@ -1,20 +1,29 @@
-@import 'shared/variables.css';
-@import 'shared/fonts.css';
-@import 'shared/header.css';
-@import 'shared/buttons.css';
+@import "shared/variables.css";
+@import "shared/fonts.css";
+@import "shared/header.css";
+@import "shared/buttons.css";
+@import "shared/form.css";
+@import "shared/author.css";
+@import "shared/books.css";
 
 :root {
-  font-family: 'Gotham Rounded';
+  font-family: "Gotham Rounded";
   font-size: 20px;
   color: var(--color-text-light);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
-  background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
+  background: linear-gradient(
+    to right,
+    var(--color-background-dark),
+    var(--color-background-light)
+  );
 }
 
 .container {
@@ -30,4 +39,39 @@ body {
 .page-header {
   font-size: 2rem;
   font-weight: 500;
+}
+
+.error-message {
+  color: hsl(var(--color-danger-hue), 100%, 50%);
+}
+
+.book-details {
+  display: flex;
+}
+
+.book-details-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.book-details-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 1rem;
+  align-items: center;
+  align-content: flex-start;
+}
+
+.book-details-btn-grid {
+  display: grid;
+  grid-template-areas:
+    "edit delete"
+    "author author";
+  grid-gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.book-details-author-button {
+  grid-area: author;
 }
